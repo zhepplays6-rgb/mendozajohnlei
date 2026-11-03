@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mendoza John Lei | Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+@property --bg{syntax:'<color>';inherits:true;initial-value:#0e1620}
+@property --panel{syntax:'<color>';inherits:true;initial-value:#131f2b}
+@property --line{syntax:'<color>';inherits:true;initial-value:#233447}
+@property --ink{syntax:'<color>';inherits:true;initial-value:#eaf2fa}
+@property --mute{syntax:'<color>';inherits:true;initial-value:#8fa3b8}
+@property --accent{syntax:'<color>';inherits:true;initial-value:#1c9be0}
+@property --neon{syntax:'<color>';inherits:true;initial-value:#2ee6c5}
+@property --hdr{syntax:'<color>';inherits:true;initial-value:#0e1620cc}
+@property --glow{syntax:'<color>';inherits:true;initial-value:#16324a}
+:root{--bg:#0e1620;--panel:#131f2b;--line:#233447;--ink:#eaf2fa;--mute:#8fa3b8;--accent:#1c9be0;--neon:#2ee6c5;--hdr:#0e1620cc;--glow:#16324a;color-scheme:dark}
+:root[data-theme="light"]{--bg:#f3f7fb;--panel:#ffffff;--line:#d3dfeb;--ink:#14212e;--mute:#546a80;--accent:#0b7cc2;--neon:#0a8c76;--hdr:#f3f7fbcc;--glow:#cfe6f7;color-scheme:light}
+:root{transition:--bg .4s ease,--panel .4s ease,--line .4s ease,--ink .4s ease,--mute .4s ease,--accent .4s ease,--neon .4s ease,--hdr .4s ease,--glow .4s ease}
+*{box-sizing:border-box;margin:0}
+html,body{height:100%;overflow:hidden}
+body{height:100dvh;display:flex;flex-direction:column;color:var(--ink);font:400 clamp(.85rem,1.5vh + .4vw,1.02rem)/1.55 Poppins,system-ui,sans-serif;padding:env(safe-area-inset-top,0) 0 env(safe-area-inset-bottom,0);background:
+ linear-gradient(var(--line) 1px,transparent 1px) 0 0/44px 44px,
+ linear-gradient(90deg,var(--line) 1px,transparent 1px) 0 0/44px 44px,
+ radial-gradient(circle at 80% 10%,var(--glow) 0,transparent 45%),var(--bg);background-blend-mode:soft-light,soft-light,normal,normal}
+h1,h2,h3{font-weight:700;line-height:1.1;letter-spacing:-.02em}
+.code{font-family:'JetBrains Mono',monospace;color:var(--neon);font-size:.85em}
+header{display:flex;align-items:center;gap:1rem;padding:1.4vh 4vw 0;border-bottom:1px solid var(--line);background:var(--hdr);backdrop-filter:blur(6px)}
+.top{flex:1;min-width:0;display:flex;gap:clamp(1rem,3vw,2.6rem);overflow-x:auto;scrollbar-width:none}
+.top::-webkit-scrollbar{display:none}
+.top button{background:none;border:0;border-bottom:2px solid transparent;color:var(--ink);font:500 1em Poppins,sans-serif;padding:.7em 0;white-space:nowrap;cursor:pointer}
+.top button:hover{color:var(--accent)}
+.top button.act{color:var(--accent);border-color:var(--accent);text-shadow:0 0 14px #1c9be088}
+#theme{flex:0 0 auto;margin-bottom:.4em;font:500 .85em Poppins,sans-serif;color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:999px;padding:.35em .9em;cursor:pointer;white-space:nowrap;transition:border-color .15s,box-shadow .15s}
+#theme:hover{border-color:var(--accent);box-shadow:0 0 14px #1c9be055}
+button:focus-visible{outline:2px solid var(--neon);outline-offset:3px}
+main{flex:1;min-height:0;display:flex;padding:0 5vw}
+.page{display:none;flex:1;min-height:0;align-items:center;gap:5vw}
+.page.on{display:flex;animation:in .35s ease}
+@keyframes in{from{opacity:0;transform:translateX(14px)}to{opacity:1;transform:none}}
+.photo{flex:0 0 auto;width:min(28vw,38vh);aspect-ratio:1;border-radius:50%;padding:6px;background:conic-gradient(from 200deg,var(--accent),var(--neon),var(--accent));box-shadow:0 0 50px #1c9be055}
+.photo span{display:grid;place-items:center;width:100%;height:100%;border-radius:50%;background:var(--panel);font:700 clamp(2rem,8vh,4rem) Poppins,sans-serif;color:var(--accent)}
+.photo{position:relative}
+.photo img{position:absolute;inset:6px;width:calc(100% - 12px);height:calc(100% - 12px);object-fit:cover;border-radius:50%;display:block}
+.photo img.lt{opacity:0;transition:opacity .4s ease}
+:root[data-theme="light"] .photo img.lt{opacity:1}
+h1{font-size:clamp(2rem,8.5vh,4.2rem);margin:1vh 0}
+h2{font-size:clamp(1.6rem,5.5vh,2.8rem);margin-bottom:2.4vh}
+.txt{flex:1;min-width:0;max-width:62ch}.txt.wide{max-width:none}
+.type{font:600 1.15em 'JetBrains Mono',monospace;min-height:1.6em}
+.cur{display:inline-block;width:.6ch;height:1.1em;background:var(--neon);vertical-align:-.2em;margin-left:2px;animation:bl 1s steps(1) infinite}
+@keyframes bl{50%{opacity:0}}
+.lead{color:var(--mute);margin-top:1.6vh}
+#more{margin-top:1.6vh;color:var(--mute);border-left:2px solid var(--accent);padding-left:1rem}
+.btns{margin-top:2.6vh}
+button.fill,footer button{font:600 1em Poppins,sans-serif;cursor:pointer;border:1.5px solid var(--accent);background:transparent;color:var(--ink);padding:.55em 1.3em;border-radius:8px;transition:background .15s,box-shadow .15s}
+button.fill{background:var(--accent);color:#fff}
+button.fill:hover,footer button:hover:not(:disabled){box-shadow:0 0 18px #1c9be099}
+footer button:disabled{opacity:.35;cursor:default}
+.tabs{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:2.2vh}
+.tabs button{font:500 .95em Poppins,sans-serif;color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:8px;padding:.4em 1em;cursor:pointer}
+.tabs button[aria-selected=true]{border-color:var(--accent);color:var(--accent);background:#1c9be01a}
+.card{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:clamp(1rem,3vh,1.8rem);max-width:60ch}
+.card h3{font-size:1.5em;margin-bottom:.5vh}.card p:last-child{color:var(--mute);margin-top:1vh}
+.grid3,.grid4{display:grid;gap:clamp(.6rem,2vh,1.1rem)}
+.grid3{grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr))}
+.grid4{grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr))}
+.tile{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:clamp(.8rem,2.4vh,1.3rem)}
+.tile b{display:block}.tile small{color:var(--mute)}
+.tile .av{display:grid;place-items:center;width:2.6em;height:2.6em;border-radius:50%;background:#1c9be025;color:var(--accent);font-weight:600;margin-bottom:1vh}
+.tile.ach h3{font-size:1.1em;margin:.4vh 0}
+footer{flex-shrink:0;display:flex;justify-content:center;align-items:center;gap:1.4rem;padding:1.6vh 5vw}
+.legal{display:flex;justify-content:flex-start;align-items:center;flex-wrap:wrap;gap:.3rem 1.6rem;flex-shrink:0;padding:.9vh max(5vw,260px) .9vh 5vw;border-top:1px solid var(--line);background:var(--hdr);color:var(--mute);font-size:.78em;line-height:1.4}
+.legal ul{list-style:none;padding:0;display:flex;flex-wrap:wrap;gap:.2rem 1.2rem}
+.legal a{color:var(--mute);text-decoration:none;transition:color .15s}
+.legal a:hover{color:var(--accent)}
+.legal a:focus-visible{outline:2px solid var(--neon);outline-offset:3px;border-radius:3px}
+.legal b{color:var(--ink);font-weight:500}
+@media (max-width:640px){.legal{justify-content:center;text-align:center;font-size:.72em;padding:.9vh 5vw 3.4rem}h1{font-size:clamp(1.5rem,4.6vh,2.2rem)}.page{flex-direction:column;justify-content:center;gap:2vh}.photo{width:20vh}.grid4{grid-template-columns:repeat(2,1fr)}}
+@media (prefers-reduced-motion:reduce){:root{transition:none}.photo img.lt{transition:none}.page.on{animation:none}.cur{animation:none}}
+</style>
+<script>try{if(localStorage.getItem('theme')==='light')document.documentElement.setAttribute('data-theme','light')}catch(e){}</script>
+</head>
+<body>
+<header>
+  <nav class="top" id="top" aria-label="Sections">
+    <button data-n="0">About Me</button>
+    <button data-n="1">Educational Attainment</button>
+    <button data-n="2">Achievements</button>
+    <button data-n="3">My Family</button>
+    <button data-n="4">Projects</button>
+  </nav>
+  <button id="theme" type="button" aria-label="Switch to light mode">Light mode</button>
+</header>
+<main>
+  <!-- 1 ABOUT ME -->
+  <section class="page on" aria-label="About Me">
+    <div class="photo"><span>JM</span><img class="base" src="pRoFiLe.jpg" alt="Photo of John Lei E. Mendoza" onerror="this.remove()"><img class="lt" src="profile-light.jpg" alt="" aria-hidden="true" onerror="this.remove()"></div>
+    <div class="txt">
+      <h1>Hello, I am John Lei E. Mendoza</h1>
+      <p class="type"><span id="typed"></span><i class="cur"></i></p>
+      <p class="lead">I am a first-year IT student at the University of the Cordilleras. My goal is to become a full-stack developer after I graduate, and I want to build great, easy-to-use websites and apps from start to finish using solid code and creative ideas.</p>
+      <div class="btns"><button class="fill" id="moreBtn" aria-expanded="false">More about me</button></div>
+      <p id="more" hidden>I have always enjoyed learning and taking on challenges. In elementary, I was a consistent honor student, won first place in the Damath competition, and graduated as class salutatorian. Today, as a BSIT student at the University of the Cordilleras, I am building my skills in programming and web development so I can grow into a full-stack developer who turns ideas into useful websites and apps.</p>
+    </div>
+  </section>
+  <!-- 2 EDUCATIONAL ATTAINMENT -->
+  <section class="page" aria-label="Educational Attainment">
+    <div class="txt wide">
+      <h2>Educational Attainment</h2>
+      <div class="tabs" role="tablist" id="edTabs"></div>
+      <div class="card"><h3 id="edT"></h3><p class="code" id="edY"></p><p id="edD"></p></div>
+    </div>
+  </section>
+  <!-- 3 ACHIEVEMENTS -->
+  <section class="page" aria-label="Achievements">
+    <div class="txt wide">
+      <h2>Achievements</h2>
+      <div class="grid3" id="ach"></div>
+    </div>
+  </section>
+  <!-- 4 MY FAMILY -->
+  <section class="page" aria-label="My Family">
+    <div class="txt wide">
+      <h2>My Family</h2>
+      <div class="grid4" id="fam"></div>
+    </div>
+  </section>
+  <!-- 5 PROJECTS -->
+  <section class="page" aria-label="Projects">
+    <div class="txt wide">
+      <h2>Projects</h2>
+      <div class="grid3" id="proj"></div>
+    </div>
+  </section>
+</main>
+<!-- Previous / Next buttons: move this block if the instructions give a different placement -->
+<footer>
+  <button id="prev" aria-label="Previous page">&lt; Previous</button>
+  <span id="count" class="code">1 / 5</span>
+  <button id="next" class="fill" aria-label="Next page">Next &gt;</button>
+</footer>
+<div class="legal">
+  <span>&copy; <span id="yr">2026</span> John Lei E. Mendoza. All rights reserved.</span>
+  <ul id="contacts" aria-label="Contact"></ul>
+</div>
+<script>
+(function(){
+  var pages=[].slice.call(document.querySelectorAll('.page')),
+      tabs=[].slice.call(document.querySelectorAll('#top button')),i=0;
+  function show(n){
+    i=Math.max(0,Math.min(pages.length-1,n));
+    pages.forEach(function(p,k){p.classList.toggle('on',k===i)});
+    tabs.forEach(function(t,k){t.classList.toggle('act',k===i);t.setAttribute('aria-current',k===i?'page':'false')});
+    document.getElementById('count').textContent=(i+1)+' / '+pages.length;
+    document.getElementById('prev').disabled=i===0;
+    document.getElementById('next').disabled=i===pages.length-1;
+    tabs[i].scrollIntoView({block:'nearest',inline:'center'});
+  }
+  tabs.forEach(function(t,k){t.onclick=function(){show(k)}});
+  document.getElementById('prev').onclick=function(){show(i-1)};
+  document.getElementById('next').onclick=function(){show(i+1)};
+  document.addEventListener('keydown',function(e){if(e.key==='ArrowRight')show(i+1);if(e.key==='ArrowLeft')show(i-1)});
+
+  /* Dark / light mode (the profile photo crossfades in CSS) */
+  var root=document.documentElement,
+      themeBtn=document.getElementById('theme'),
+      theme='dark';
+  try{var saved=localStorage.getItem('theme');if(saved==='light'||saved==='dark')theme=saved}catch(e){}
+  function applyTheme(next){
+    theme=next;
+    if(next==='light'){root.setAttribute('data-theme','light')}else{root.removeAttribute('data-theme')}
+    themeBtn.textContent=next==='light'?'Dark mode':'Light mode';
+    themeBtn.setAttribute('aria-label',next==='light'?'Switch to dark mode':'Switch to light mode');
+  }
+  themeBtn.onclick=function(){
+    var next=theme==='dark'?'light':'dark';
+    applyTheme(next);
+    try{localStorage.setItem('theme',next)}catch(e){}
+  };
+  applyTheme(theme);
+
+  /* Copyright year + contacts: EDIT YOUR CONTACTS HERE (label, text shown, link) */
+  document.getElementById('yr').textContent=new Date().getFullYear();
+  var contacts=[
+    ['Email','mendozajohnlei7@gmail.com','mailto:mendozajohnlei7@gmail.com'],
+    ['Phone','09995691110','tel:+639995691110']
+  ];
+  document.getElementById('contacts').innerHTML=contacts.map(function(c){
+    var ext=c[2].indexOf('http')===0?' target="_blank" rel="noopener noreferrer"':'';
+    return '<li><b>'+c[0]+':</b> <a href="'+c[2]+'"'+ext+'>'+c[1]+'</a></li>';
+  }).join('');
+
+  /* Typing effect: edit this line */
+  var line='Aspiring developer. Future problem solver.',t=document.getElementById('typed'),c=0;
+  if(window.matchMedia('(prefers-reduced-motion:reduce)').matches){t.textContent=line}
+  else{(function go(){t.textContent=line.slice(0,c++);if(c<=line.length)setTimeout(go,55)})()}
+
+  var mb=document.getElementById('moreBtn'),m=document.getElementById('more');
+  mb.onclick=function(){var o=m.hidden;m.hidden=!o;mb.setAttribute('aria-expanded',o);mb.textContent=o?'Show less':'More about me'};
+
+  /* EDIT YOUR CONTENT HERE */
+  var edu=[
+    ['Elementary','Dusoc Elementary School','2014 - 2020','Consistent honor student. Grades 3 and 4: 2nd place, Damath competition. Grades 5 and 6: 1st place, Damath competition. Graduated as class salutatorian.'],
+    ['Junior High','Bayambang National High School - Junior High School','2020 - 2024','Add honors or notes here.'],
+    ['Senior High','Bayambang National High School - Senior High School, strand','2024 - 2026','Add honors or notes here.'],
+    ['College','University of the Cordilleras, BSIT','2026 - Present','Add honors or notes here.']
+  ];
+  var ach=[
+    ['Achievement one','2024','Short description.'],
+    ['Achievement two','2023','Short description.'],
+    ['Achievement three','2022','Short description.']
+  ];
+  var fam=[['Mother','Name'],['Father','Name'],['Sibling','Name'],['Sibling','Name']];
+  var proj=[
+    ['Project one','2026','Short description of what it does and the tools you used.'],
+    ['Project two','2026','Short description of what it does and the tools you used.'],
+    ['Project three','2026','Short description of what it does and the tools you used.']
+  ];
+
+  function initials(s){return s==='Name'?'N':s.split(' ').map(function(w){return w[0]}).join('').slice(0,2)}
+  var et=document.getElementById('edTabs');
+  function setEd(n){
+    [].forEach.call(et.children,function(b,k){b.setAttribute('aria-selected',k===n)});
+    document.getElementById('edT').textContent=edu[n][1];
+    document.getElementById('edY').textContent=edu[n][2];
+    document.getElementById('edD').textContent=edu[n][3];
+  }
+  edu.forEach(function(e,n){var b=document.createElement('button');b.setAttribute('role','tab');b.textContent=e[0];b.onclick=function(){setEd(n)};et.appendChild(b)});
+  setEd(3);
+  document.getElementById('ach').innerHTML=ach.map(function(a){return '<div class="tile ach"><span class="code">'+a[1]+'</span><h3>'+a[0]+'</h3><small>'+a[2]+'</small></div>'}).join('');
+  document.getElementById('fam').innerHTML=fam.map(function(f){return '<div class="tile"><div class="av">'+initials(f[1])+'</div><b>'+f[1]+'</b><small>'+f[0]+'</small></div>'}).join('');
+  document.getElementById('proj').innerHTML=proj.map(function(p){return '<div class="tile ach"><span class="code">'+p[1]+'</span><h3>'+p[0]+'</h3><small>'+p[2]+'</small></div>'}).join('');
+  show(0);
+})();
+</script>
+</body>
+</html>
