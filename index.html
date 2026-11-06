@@ -48,13 +48,17 @@ main{flex:1;min-height:0;display:flex;padding:0 5vw}
 :root[data-theme="light"] .photo img.lt{opacity:1}
 h1{font-size:clamp(2rem,8.5vh,4.2rem);margin:1vh 0}
 h2{font-size:clamp(1.6rem,5.5vh,2.8rem);margin-bottom:2.4vh}
+.sub{color:var(--mute);margin:-1.4vh 0 1.6vh}
 .txt{flex:1;min-width:0;max-width:62ch}.txt.wide{max-width:none}
 .type{font:600 1.15em 'JetBrains Mono',monospace;min-height:1.6em}
 .cur{display:inline-block;width:.6ch;height:1.1em;background:var(--neon);vertical-align:-.2em;margin-left:2px;animation:bl 1s steps(1) infinite}
 @keyframes bl{50%{opacity:0}}
-.lead{color:var(--mute);margin-top:1.6vh}
-#more{margin-top:1.6vh;color:var(--mute);border-left:2px solid var(--accent);padding-left:1rem}
-.btns{margin-top:2.6vh}
+.socials{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:2.4vh;list-style:none;padding:0}
+.socials a{display:inline-flex;align-items:center;gap:.5em;font:500 .95em Poppins,sans-serif;color:var(--ink);text-decoration:none;background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:.45em 1.1em;transition:border-color .15s,color .15s,box-shadow .15s,transform .15s}
+.socials svg{width:1.15em;height:1.15em;fill:currentColor;flex:0 0 auto;color:var(--neon);transition:color .15s}
+.socials a:hover svg{color:var(--accent)}
+.socials a:hover{border-color:var(--accent);color:var(--accent);box-shadow:0 0 16px #1c9be055;transform:translateY(-2px)}
+.socials a:focus-visible{outline:2px solid var(--neon);outline-offset:3px}
 button.fill,footer button{font:600 1em Poppins,sans-serif;cursor:pointer;border:1.5px solid var(--accent);background:transparent;color:var(--ink);padding:.55em 1.3em;border-radius:8px;transition:background .15s,box-shadow .15s}
 button.fill{background:var(--accent);color:#fff}
 button.fill:hover,footer button:hover:not(:disabled){box-shadow:0 0 18px #1c9be099}
@@ -71,6 +75,15 @@ footer button:disabled{opacity:.35;cursor:default}
 .tile b{display:block}.tile small{color:var(--mute)}
 .tile .av{display:grid;place-items:center;width:2.6em;height:2.6em;border-radius:50%;background:#1c9be025;color:var(--accent);font-weight:600;margin-bottom:1vh}
 .tile.ach h3{font-size:1.1em;margin:.4vh 0}
+.compact{grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr));gap:.5rem}
+.compact .tile{padding:.5rem .85rem;font-size:.85em;line-height:1.35}
+.compact .tile small{font-size:.8em}
+.about{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.7fr);gap:clamp(.8rem,2.4vw,1.6rem);align-items:start;max-height:100%;overflow-y:auto;scrollbar-width:thin}
+.about .compact{grid-template-columns:1fr}
+.card.bio{max-width:none;padding:clamp(.9rem,2.6vh,1.4rem) clamp(1rem,2.4vw,1.6rem)}
+.card.bio p{margin-top:1.2vh}
+@media (max-width:820px){.about{grid-template-columns:1fr}.about .compact{grid-template-columns:repeat(2,1fr)}}
+.tile.info b{font-weight:500;overflow-wrap:anywhere;margin-top:.3vh}
 footer{flex-shrink:0;display:flex;justify-content:center;align-items:center;gap:1.4rem;padding:1.6vh 5vw}
 .legal{display:flex;justify-content:flex-start;align-items:center;flex-wrap:wrap;gap:.3rem 1.6rem;flex-shrink:0;padding:.9vh max(5vw,260px) .9vh 5vw;border-top:1px solid var(--line);background:var(--hdr);color:var(--mute);font-size:.78em;line-height:1.4}
 .legal ul{list-style:none;padding:0;display:flex;flex-wrap:wrap;gap:.2rem 1.2rem}
@@ -86,27 +99,42 @@ footer{flex-shrink:0;display:flex;justify-content:center;align-items:center;gap:
 <body>
 <header>
   <nav class="top" id="top" aria-label="Sections">
-    <button data-n="0">About Me</button>
-    <button data-n="1">Educational Attainment</button>
-    <button data-n="2">Achievements</button>
-    <button data-n="3">My Family</button>
-    <button data-n="4">Projects</button>
+    <button data-n="0">Home</button>
+    <button data-n="1">About Me</button>
+    <button data-n="2">Educational Attainment</button>
+    <button data-n="3">Achievements</button>
+    <button data-n="4">My Family</button>
+    <button data-n="5">Projects</button>
   </nav>
   <button id="theme" type="button" aria-label="Switch to light mode">Light mode</button>
 </header>
 <main>
-  <!-- 1 ABOUT ME -->
-  <section class="page on" aria-label="About Me">
+  <!-- 1 HOME -->
+  <section class="page on" aria-label="Home">
     <div class="photo"><span>JM</span><img class="base" src="pRoFiLe.jpg" alt="Photo of John Lei E. Mendoza" onerror="this.remove()"><img class="lt" src="profile-light.jpg" alt="" aria-hidden="true" onerror="this.remove()"></div>
     <div class="txt">
       <h1>Hello, I am John Lei E. Mendoza</h1>
       <p class="type"><span id="typed"></span><i class="cur"></i></p>
-      <p class="lead">I am a first-year IT student at the University of the Cordilleras. My goal is to become a full-stack developer after I graduate, and I want to build great, easy-to-use websites and apps from start to finish using solid code and creative ideas.</p>
-      <div class="btns"><button class="fill" id="moreBtn" aria-expanded="false">More about me</button></div>
-      <p id="more" hidden>I have always enjoyed learning and taking on challenges. In elementary, I was a consistent honor student, won first place in the Damath competition, and graduated as class salutatorian. Today, as a BSIT student at the University of the Cordilleras, I am building my skills in programming and web development so I can grow into a full-stack developer who turns ideas into useful websites and apps.</p>
+      <ul class="socials" id="socials" aria-label="Social media"></ul>
     </div>
   </section>
-  <!-- 2 EDUCATIONAL ATTAINMENT -->
+  <!-- 2 ABOUT ME -->
+  <section class="page" aria-label="About Me">
+    <div class="txt wide">
+      <h2>Personal Information</h2>
+      <div class="about">
+        <div class="grid4 compact" id="info"></div>
+        <div class="card bio">
+          <small class="code">Personal Info</small>
+          <!-- EDIT YOUR TEXT HERE -->
+          <p>Hi, I'm John Lei, born on October 2, 2008. I'm a first-year IT student at the University of the Cordilleras, working toward becoming a full-stack developer.</p>
+          <p>I know HTML and CSS, and I'm still learning JavaScript and Python. Outside of coding, I edit videos and do 3D modeling in Blender.</p>
+          <p>I recently joined AWS to learn new knowledge and improve myself.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- 3 EDUCATIONAL ATTAINMENT -->
   <section class="page" aria-label="Educational Attainment">
     <div class="txt wide">
       <h2>Educational Attainment</h2>
@@ -114,21 +142,21 @@ footer{flex-shrink:0;display:flex;justify-content:center;align-items:center;gap:
       <div class="card"><h3 id="edT"></h3><p class="code" id="edY"></p><p id="edD"></p></div>
     </div>
   </section>
-  <!-- 3 ACHIEVEMENTS -->
+  <!-- 4 ACHIEVEMENTS -->
   <section class="page" aria-label="Achievements">
     <div class="txt wide">
       <h2>Achievements</h2>
       <div class="grid3" id="ach"></div>
     </div>
   </section>
-  <!-- 4 MY FAMILY -->
+  <!-- 5 MY FAMILY -->
   <section class="page" aria-label="My Family">
     <div class="txt wide">
       <h2>My Family</h2>
       <div class="grid4" id="fam"></div>
     </div>
   </section>
-  <!-- 5 PROJECTS -->
+  <!-- 6 PROJECTS -->
   <section class="page" aria-label="Projects">
     <div class="txt wide">
       <h2>Projects</h2>
@@ -139,7 +167,7 @@ footer{flex-shrink:0;display:flex;justify-content:center;align-items:center;gap:
 <!-- Previous / Next buttons: move this block if the instructions give a different placement -->
 <footer>
   <button id="prev" aria-label="Previous page">&lt; Previous</button>
-  <span id="count" class="code">1 / 5</span>
+  <span id="count" class="code">1 / 6</span>
   <button id="next" class="fill" aria-label="Next page">Next &gt;</button>
 </footer>
 <div class="legal">
@@ -198,10 +226,33 @@ footer{flex-shrink:0;display:flex;justify-content:center;align-items:center;gap:
   if(window.matchMedia('(prefers-reduced-motion:reduce)').matches){t.textContent=line}
   else{(function go(){t.textContent=line.slice(0,c++);if(c<=line.length)setTimeout(go,55)})()}
 
-  var mb=document.getElementById('moreBtn'),m=document.getElementById('more');
-  mb.onclick=function(){var o=m.hidden;m.hidden=!o;mb.setAttribute('aria-expanded',o);mb.textContent=o?'Show less':'More about me'};
+  /* Social buttons: EDIT YOUR LINKS HERE (label, link) */
+  var socials=[
+    ['GitHub','https://github.com/zhepplays6-rgb'],
+    ['Discord','https://discord.gg/MdB4aWbv'],
+    ['Facebook','https://www.facebook.com/share/19kDcxTMDZ/?mibextid=wwXIfr'],
+    ['TikTok','https://www.tiktok.com/@imnotzhep?_r=1&_t=ZS-9BAMrpglW6P']
+  ];
+  var icons={
+    GitHub:'M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12',
+    Discord:'M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z',
+    Facebook:'M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z',
+    TikTok:'M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z'
+  };
+  document.getElementById('socials').innerHTML=socials.map(function(x){
+    return '<li><a href="'+x[1]+'" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="'+icons[x[0]]+'"/></svg>'+x[0]+'</a></li>';
+  }).join('');
 
   /* EDIT YOUR CONTENT HERE */
+  var info=[
+    ['Birthday','October 2, 2008'],
+    ['Age','18'],
+    ['Address','Teacher\'s Camp, Lower Cabinet Hill, Baguio City'],
+    ['Course','BS Information Technology'],
+    ['School','University of the Cordilleras'],
+    ['Email','mendozajohnlei7@gmail.com'],
+    ['Phone','09995691110']
+  ];
   var edu=[
     ['Elementary','Dusoc Elementary School','2014 - 2020','Consistent honor student. Grades 3 and 4: 2nd place, Damath competition. Grades 5 and 6: 1st place, Damath competition. Graduated as class salutatorian.'],
     ['Junior High','Bayambang National High School - Junior High School','2020 - 2024','Add honors or notes here.'],
@@ -230,6 +281,7 @@ footer{flex-shrink:0;display:flex;justify-content:center;align-items:center;gap:
   }
   edu.forEach(function(e,n){var b=document.createElement('button');b.setAttribute('role','tab');b.textContent=e[0];b.onclick=function(){setEd(n)};et.appendChild(b)});
   setEd(3);
+  document.getElementById('info').innerHTML=info.map(function(f){return '<div class="tile info"><small class="code">'+f[0]+'</small><b>'+f[1]+'</b></div>'}).join('');
   document.getElementById('ach').innerHTML=ach.map(function(a){return '<div class="tile ach"><span class="code">'+a[1]+'</span><h3>'+a[0]+'</h3><small>'+a[2]+'</small></div>'}).join('');
   document.getElementById('fam').innerHTML=fam.map(function(f){return '<div class="tile"><div class="av">'+initials(f[1])+'</div><b>'+f[1]+'</b><small>'+f[0]+'</small></div>'}).join('');
   document.getElementById('proj').innerHTML=proj.map(function(p){return '<div class="tile ach"><span class="code">'+p[1]+'</span><h3>'+p[0]+'</h3><small>'+p[2]+'</small></div>'}).join('');
