@@ -31,8 +31,8 @@ header{display:flex;align-items:center;gap:1rem;padding:1.4vh 4vw 0;border-botto
 .top{flex:1;min-width:0;display:flex;gap:clamp(1rem,3vw,2.6rem);overflow-x:auto;scrollbar-width:none}
 .top::-webkit-scrollbar{display:none}
 .top button{background:none;border:0;border-bottom:2px solid transparent;color:var(--ink);font:500 1em Poppins,sans-serif;padding:.7em 0;white-space:nowrap;cursor:pointer}
+.top button[hidden]{display:none}
 .top button:hover{color:var(--accent)}
-.top button.act{color:var(--accent);border-color:var(--accent);text-shadow:0 0 14px #1c9be088}
 #theme{flex:0 0 auto;margin-bottom:.4em;font:500 .85em Poppins,sans-serif;color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:999px;padding:.35em .9em;cursor:pointer;white-space:nowrap;transition:border-color .15s,box-shadow .15s}
 #theme:hover{border-color:var(--accent);box-shadow:0 0 14px #1c9be055}
 button:focus-visible{outline:2px solid var(--neon);outline-offset:3px}
@@ -48,7 +48,6 @@ main{flex:1;min-height:0;display:flex;padding:0 5vw}
 :root[data-theme="light"] .photo img.lt{opacity:1}
 h1{font-size:clamp(2rem,8.5vh,4.2rem);margin:1vh 0}
 h2{font-size:clamp(1.6rem,5.5vh,2.8rem);margin-bottom:2.4vh}
-.sub{color:var(--mute);margin:-1.4vh 0 1.6vh}
 .txt{flex:1;min-width:0;max-width:62ch}.txt.wide{max-width:none}
 .type{font:600 1.15em 'JetBrains Mono',monospace;min-height:1.6em}
 .cur{display:inline-block;width:.6ch;height:1.1em;background:var(--neon);vertical-align:-.2em;margin-left:2px;animation:bl 1s steps(1) infinite}
@@ -59,51 +58,40 @@ h2{font-size:clamp(1.6rem,5.5vh,2.8rem);margin-bottom:2.4vh}
 .socials a:hover svg{color:var(--accent)}
 .socials a:hover{border-color:var(--accent);color:var(--accent);box-shadow:0 0 16px #1c9be055;transform:translateY(-2px)}
 .socials a:focus-visible{outline:2px solid var(--neon);outline-offset:3px}
-button.fill,footer button{font:600 1em Poppins,sans-serif;cursor:pointer;border:1.5px solid var(--accent);background:transparent;color:var(--ink);padding:.55em 1.3em;border-radius:8px;transition:background .15s,box-shadow .15s}
-button.fill{background:var(--accent);color:#fff}
-button.fill:hover,footer button:hover:not(:disabled){box-shadow:0 0 18px #1c9be099}
-footer button:disabled{opacity:.35;cursor:default}
-.tabs{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:2.2vh}
-.tabs button{font:500 .95em Poppins,sans-serif;color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:8px;padding:.4em 1em;cursor:pointer}
-.tabs button[aria-selected=true]{border-color:var(--accent);color:var(--accent);background:#1c9be01a}
-.card{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:clamp(1rem,3vh,1.8rem);max-width:60ch}
-.card h3{font-size:1.5em;margin-bottom:.5vh}.card p:last-child{color:var(--mute);margin-top:1vh}
-.grid3,.grid4{display:grid;gap:clamp(.6rem,2vh,1.1rem)}
-.grid3{grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr))}
-.grid4{grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr))}
-.tile{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:clamp(.8rem,2.4vh,1.3rem)}
-.tile b{display:block}.tile small{color:var(--mute)}
-.tile .av{display:grid;place-items:center;width:2.6em;height:2.6em;border-radius:50%;background:#1c9be025;color:var(--accent);font-weight:600;margin-bottom:1vh}
-.tile.ach h3{font-size:1.1em;margin:.4vh 0}
-.lead{color:var(--mute);max-width:46ch}
 
-/* Personal Info: photo + headline on the left, terminal card on the right */
-.about{flex:1;min-width:0;display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(1rem,4vw,4rem);align-items:center;max-height:100%;overflow:hidden}
-.about-l{min-width:0}
-.ring{position:relative;height:clamp(170px,36vh,400px);aspect-ratio:1171/1343;padding:10px;margin-bottom:1.6vh}
-.ring::before{content:'';position:absolute;inset:0;border-radius:20px;border:2px dashed var(--accent)}
-@keyframes spin{to{transform:rotate(360deg)}}
-.ring .pic{position:relative;width:100%;height:100%;border-radius:12px;overflow:hidden;background:var(--panel);box-shadow:0 0 40px #1c9be055}
-.ring .pic>span{position:absolute;inset:0;display:grid;place-items:center;font:700 clamp(2rem,8vh,4rem) Poppins,sans-serif;color:var(--accent)}
-.ring .pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.ring .pic img.lt{opacity:0;transition:opacity .4s ease}
-:root[data-theme="light"] .ring .pic img.lt{opacity:1}
-.about h2{font-size:clamp(1.8rem,7vh,3.6rem);margin:.8vh 0 1.4vh;color:var(--accent)}
-.about-r{min-width:0}
-.term{background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden;box-shadow:0 0 40px #1c9be022;font-family:'JetBrains Mono',monospace}
-.term-bar{display:flex;align-items:center;gap:.45em;padding:.7em 1em;border-bottom:1px solid var(--line);color:var(--mute);font-size:.85em}
-.term-bar i{width:.75em;height:.75em;border-radius:50%;display:block}
-.term-bar i:nth-child(1){background:#ff5f57}.term-bar i:nth-child(2){background:#febc2e}.term-bar i:nth-child(3){background:#28c840}
-.term-bar span{margin-left:.7em}
-.term-body{padding:clamp(.7rem,2vh,1.5rem) clamp(1rem,2.4vw,1.6rem);font-size:clamp(.68rem,1.6vh,.95rem)}
-.prompt{font-weight:600}
-.prompt::before,.prompt.end::before{content:'$ ';color:var(--accent)}
-.rows{display:grid;grid-template-columns:max-content minmax(0,1fr);gap:.5em 1.8em;margin:1.6vh 0}
-.rows dt{color:var(--accent)}
-.rows dd{margin:0;font-weight:600;overflow-wrap:anywhere}
-.dot{display:inline-block;width:.6em;height:.6em;border-radius:50%;background:var(--accent);margin-right:.7em;box-shadow:0 0 10px var(--accent)}
-@media (max-width:820px){.about{grid-template-columns:1fr;align-content:center;gap:1.2vh}.about-l{display:flex;align-items:center;gap:.9rem}.ring{flex:0 0 auto;height:17vh;padding:6px;margin:0}.about h2{font-size:clamp(1.2rem,3.6vh,1.8rem);margin:.4vh 0}.about .lead{display:none}.term-bar{padding:.45em .8em}.term-body{padding:.7rem .9rem;font-size:clamp(.62rem,1.6vh,.8rem)}.rows{gap:.25em 1em;margin:.8vh 0}}
-@media (prefers-reduced-motion:reduce){.ring::before{animation:none}.ring .pic img.lt{transition:none}}
+/* Personal Info: card layout */
+.pinfo{flex:1;min-width:0;min-height:0;align-self:stretch;display:flex;flex-direction:column;justify-content:center;gap:1.2vh;padding:1.2vh 0;overflow:hidden;font-size:clamp(.6rem,1.5vh,.95rem);line-height:1.35}
+.pcard{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:1.4vh clamp(.8rem,2vw,1.6rem)}
+.phead{display:flex;align-items:center;gap:1rem;padding-bottom:1.1vh;margin-bottom:1.1vh;border-bottom:1px solid var(--line)}
+.avatar{position:relative;flex:0 0 auto;width:clamp(44px,8vh,80px);aspect-ratio:1;border-radius:50%;border:3px solid var(--accent);overflow:hidden;background:var(--panel);box-shadow:0 0 20px #1c9be055}
+.avatar span{position:absolute;inset:0;display:grid;place-items:center;font:700 1.3rem Poppins,sans-serif;color:var(--accent)}
+.avatar img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.avatar img.lt{opacity:0;transition:opacity .4s ease}
+:root[data-theme="light"] .avatar img.lt{opacity:1}
+.phead h2{font-size:clamp(1.1rem,3.4vh,2rem);margin:0 0 .2em}
+.fgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.1vh clamp(.8rem,2vw,1.6rem)}
+.fgrid.five{grid-template-columns:repeat(5,minmax(0,1fr))}
+.f{min-width:0}
+.f small{display:block;font-size:.68em;letter-spacing:.09em;text-transform:uppercase;color:var(--mute);margin-bottom:.15em}
+.f b{display:block;font-weight:600;font-size:.95em;line-height:1.35;overflow-wrap:anywhere}
+.f.tbd b{color:var(--mute);font-weight:400;font-style:italic}
+.minis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(.5rem,1vw,.9rem)}
+.mini{display:flex;align-items:center;gap:.7rem;min-width:0;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:1.1vh .8rem}
+.mini i{flex:0 0 auto;display:grid;place-items:center;width:2.4em;height:2.4em;border-radius:10px;background:#1c9be01f;border:1px solid var(--line);font-style:normal}
+.mini i svg{width:1.2em;height:1.2em;fill:none;stroke:var(--accent);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.mini small{display:block;font-size:.66em;letter-spacing:.09em;text-transform:uppercase;color:var(--mute)}
+.mini b{display:block;font-size:.88em;font-weight:600;line-height:1.3;overflow-wrap:anywhere}
+.mini.tbd b{color:var(--mute);font-weight:400;font-style:italic}
+.motto{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:12px;padding:1.1vh 1.2rem}
+.motto p{font-style:italic}
+.motto small{display:block;margin-top:.2em;font-size:.66em;letter-spacing:.09em;text-transform:uppercase;color:var(--mute)}
+.motto.tbd p{color:var(--mute)}
+@media (max-width:820px){
+  .fgrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .fgrid.five{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .minis{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .pinfo{gap:.8vh}.pcard{padding:1vh .8rem}.fgrid{gap:.7vh .8rem}.mini{padding:.8vh .6rem}.mini i{display:none}
+}
 
 /* Achievements: education cards on top, one photo grid with every award below */
 .achv{flex:1;min-width:0;min-height:0;align-self:stretch;display:flex;flex-direction:column;gap:1.1vh;padding:1.4vh 0 1vh;overflow:hidden}
@@ -146,7 +134,7 @@ footer button:disabled{opacity:.35;cursor:default}
   .edu{grid-template-columns:repeat(2,minmax(0,1fr))}
   .ecard:nth-child(n+3){display:none}
   .hint{display:none}
-  .shots{grid-template-columns:repeat(3,minmax(0,1fr));grid-auto-rows:clamp(86px,15vh,130px);overflow-y:auto;align-content:start}
+  .shots{grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:none;grid-auto-rows:minmax(0,1fr);overflow:hidden}
   .shot .cap{display:none}
   .ecard p,.ahead .lead{display:none}
   .ecard{padding:.45rem .6rem}
@@ -162,16 +150,15 @@ footer button:disabled{opacity:.35;cursor:default}
 .pbtn:hover,.pbtn:focus-visible{border-color:var(--accent);box-shadow:0 0 18px #1c9be055}
 .pbtn:focus-visible{outline:none}
 .pbtn .tag{position:absolute;left:.7em;bottom:.7em;max-width:calc(100% - 1.4em);font:500 clamp(.62rem,1.4vh,.8rem)/1.3 Poppins,sans-serif;color:var(--ink);background:color-mix(in srgb,var(--panel) 88%,transparent);border:1px solid var(--line);border-radius:999px;padding:.25em .9em;backdrop-filter:blur(4px)}
-@media (max-width:820px){.ff{overflow-y:auto}.ff-row{flex:none;height:clamp(120px,22vh,200px);display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr)}.pbtn{aspect-ratio:auto}.pbtn .tag{display:none}}
-footer{flex-shrink:0;display:flex;justify-content:center;align-items:center;gap:1.4rem;padding:1.6vh 5vw}
+@media (max-width:820px){.ff{overflow:hidden}.ff-row{flex:1;min-height:0;display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr)}.pbtn{aspect-ratio:auto}.pbtn .tag{display:none}}
 .legal{display:flex;justify-content:flex-start;align-items:center;flex-wrap:wrap;gap:.3rem 1.6rem;flex-shrink:0;padding:.9vh max(5vw,260px) .9vh 5vw;border-top:1px solid var(--line);background:var(--hdr);color:var(--mute);font-size:.78em;line-height:1.4}
 .legal ul{list-style:none;padding:0;display:flex;flex-wrap:wrap;gap:.2rem 1.2rem}
 .legal a{color:var(--mute);text-decoration:none;transition:color .15s}
 .legal a:hover{color:var(--accent)}
 .legal a:focus-visible{outline:2px solid var(--neon);outline-offset:3px;border-radius:3px}
 .legal b{color:var(--ink);font-weight:500}
-@media (max-width:640px){.legal{justify-content:center;text-align:center;font-size:.72em;padding:.9vh 5vw 3.4rem}h1{font-size:clamp(1.5rem,4.6vh,2.2rem)}.page{flex-direction:column;justify-content:center;gap:2vh}.photo{height:34vh}.grid4{grid-template-columns:repeat(2,1fr)}}
-@media (prefers-reduced-motion:reduce){:root{transition:none}.photo img.lt{transition:none}.page.on{animation:none}.cur{animation:none}}
+@media (max-width:640px){.legal{justify-content:center;text-align:center;font-size:.72em;padding:.9vh 5vw 3.4rem}h1{font-size:clamp(1.5rem,4.6vh,2.2rem)}.page{flex-direction:column;justify-content:center;gap:2vh}.photo{height:34vh}}
+@media (prefers-reduced-motion:reduce){:root{transition:none}.photo img.lt,.avatar img.lt{transition:none}.page.on{animation:none}.cur{animation:none}}
 </style>
 <script>try{if(localStorage.getItem('theme')==='light')document.documentElement.setAttribute('data-theme','light')}catch(e){}</script>
 </head>
@@ -195,41 +182,22 @@ footer{flex-shrink:0;display:flex;justify-content:center;align-items:center;gap:
       <ul class="socials" id="socials" aria-label="Social media"></ul>
     </div>
   </section>
-  <!-- 2 PERSONAL INFO -->
+  <!-- 2 PERSONAL INFO (filled in by the PERSONAL INFO block in the script) -->
   <section class="page" aria-label="Personal Info">
-    <div class="about">
-      <div class="about-l">
-        <div class="ring">
-          <div class="pic">
-            <span>JM</span><img class="base" src="pRoFiLe.jpg" alt="Photo of John Lei E. Mendoza" onerror="this.remove()"><img class="lt" src="profile-light.jpg" alt="" aria-hidden="true" onerror="this.remove()">
+    <div class="pinfo">
+      <div class="pcard">
+        <div class="phead">
+          <div class="avatar"><span>JM</span><img class="base" src="pRoFiLe.jpg" alt="Photo of John Lei E. Mendoza" onerror="this.remove()"><img class="lt" src="profile-light.jpg" alt="" aria-hidden="true" onerror="this.remove()"></div>
+          <div>
+            <h2 id="pName"></h2>
+            <span class="code" id="pSub"></span>
           </div>
         </div>
-        <h2>Aspiring developer.<br>Future problem solver.</h2>
-        <p class="lead">First-year IT student working toward becoming a full-stack developer.</p>
+        <div class="fgrid" id="pMain"></div>
       </div>
-      <div class="about-r">
-        <div class="term">
-          <div class="term-bar"><i></i><i></i><i></i><span>jm.profile</span></div>
-          <div class="term-body">
-            <p class="prompt">Personal Info:</p>
-            <!-- EDIT YOUR INFO HERE -->
-            <dl class="rows">
-              <dt>name:</dt><dd>John Lei E. Mendoza</dd>
-              <dt>birthday:</dt><dd>October 2, 2008</dd>
-              <dt>age:</dt><dd>18</dd>
-              <dt>address:</dt><dd>Teacher's Camp, Lower Cabinet Hill, Baguio City</dd>
-              <dt>school:</dt><dd>University of the Cordilleras</dd>
-              <dt>program:</dt><dd>BS Information Technology</dd>
-              <dt>year:</dt><dd>1st year</dd>
-              <dt>language:</dt><dd>English, Filipino</dd>
-              <dt>religion:</dt><dd>Roman Catholic</dd>
-              <dt>interests:</dt><dd>video editing, 3D modeling in Blender</dd>
-              <dt>status:</dt><dd><span class="dot"></span>Learning cloud with AWS</dd>
-            </dl>
-            <p class="prompt end"><i class="cur"></i></p>
-          </div>
-        </div>
-      </div>
+      <div class="pcard"><div class="fgrid five" id="pBody"></div></div>
+      <div class="minis" id="pMinis"></div>
+      <div class="motto" id="pMotto"></div>
     </div>
   </section>
   <!-- 3 ACHIEVEMENTS -->
@@ -264,12 +232,6 @@ footer{flex-shrink:0;display:flex;justify-content:center;align-items:center;gap:
     </div>
   </section>
 </main>
-<!-- Previous / Next buttons: move this block if the instructions give a different placement -->
-<footer>
-  <button id="prev" aria-label="Previous page">&lt; Previous</button>
-  <span id="count" class="code">1 / 4</span>
-  <button id="next" class="fill" aria-label="Next page">Next &gt;</button>
-</footer>
 <div class="legal">
   <span>&copy; <span id="yr">2026</span> John Lei E. Mendoza. All rights reserved.</span>
   <ul id="contacts" aria-label="Contact"></ul>
@@ -305,7 +267,6 @@ footer{flex-shrink:0;display:flex;justify-content:center;align-items:center;gap:
     dad:'family/handshake-dad.jpg',
     mom:'family/hugging-mom.jpg',
     sib:'family/selfie-little-brother.jpg',
-    cafe:'family/friends-cafe.jpg',
     mirror:'family/friends-mirror-selfie.jpg'
   };
 </script>
@@ -313,26 +274,19 @@ footer{flex-shrink:0;display:flex;justify-content:center;align-items:center;gap:
 (function(){
   var pages=[].slice.call(document.querySelectorAll('.page')),
       tabs=[].slice.call(document.querySelectorAll('#top button')),i=0;
+  /* The tab for the page you are on is hidden; the other three stay visible */
   function show(n){
     i=Math.max(0,Math.min(pages.length-1,n));
     pages.forEach(function(p,k){p.classList.toggle('on',k===i)});
-    tabs.forEach(function(t,k){t.classList.toggle('act',k===i);t.setAttribute('aria-current',k===i?'page':'false')});
-    document.getElementById('count').textContent=(i+1)+' / '+pages.length;
-    document.getElementById('prev').disabled=i===0;
-    document.getElementById('next').disabled=i===pages.length-1;
-    tabs[i].scrollIntoView({block:'nearest',inline:'center'});
+    tabs.forEach(function(t,k){t.hidden=(k===i)});
   }
   tabs.forEach(function(t,k){t.onclick=function(){show(k)}});
-  document.getElementById('prev').onclick=function(){show(i-1)};
-  document.getElementById('next').onclick=function(){show(i+1)};
   document.addEventListener('keydown',function(e){
     if(lbOpen()){
       if(e.key==='Escape')lbClose();
       else if(e.key==='ArrowRight')lbStep(1);
       else if(e.key==='ArrowLeft')lbStep(-1);
-      return;
     }
-    if(e.key==='ArrowRight')show(i+1);if(e.key==='ArrowLeft')show(i-1)
   });
 
   /* Dark / light mode (the profile photo crossfades in CSS) */
@@ -368,6 +322,51 @@ footer{flex-shrink:0;display:flex;justify-content:center;align-items:center;gap:
   var line='Aspiring developer. Future problem solver.',t=document.getElementById('typed'),c=0;
   if(window.matchMedia('(prefers-reduced-motion:reduce)').matches){t.textContent=line}
   else{(function go(){t.textContent=line.slice(0,c++);if(c<=line.length)setTimeout(go,55)})()}
+
+  function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;')}
+
+  /* ===== PERSONAL INFO: EDIT YOUR DETAILS HERE =====
+     Anything left as '' shows "Add your info" in grey, so just type the real value between the quotes. */
+  var P={
+    name:'John Lei E. Mendoza',
+    sub:'BSIT \u2022 1st Year',
+    main:[
+      ['Gender','Male'],['Status','Single'],['Age','18'],
+      ['Birthday','October 2, 2008'],['Address',"Teacher's Camp, Lower Cabinet Hill, Baguio City"],['Phone Number','09995691110'],
+      ['School','University of the Cordilleras'],['Year Level','1st Year'],['Program','BS Information Technology'],
+      ['College','College of Information Technology'],['',''],['Email','mendozajohnlei7@gmail.com'],
+      ["Father's Name",'Vedasto A. Mendoza'],['',''],["Mother's Name",'Lennie E. Mendoza']
+    ],
+    body:[
+      ['Blood Type','O+'],['Eye Color','Black'],['Height','154.94 cm'],['Weight','132.277 lbs'],['Shoe Size','US 8'],
+      ['Zodiac Sign','Libra'],['Birthplace','Bayambang'],['Hometown','Bayambang, Pangasinan'],['Nationality','Filipino'],['Religion','Roman Catholic']
+    ],
+    minis:[
+      ['Languages','English \u2022 Filipino','<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>'],
+      ['Hobbies','Playing Online Games','<rect x="2" y="6" width="20" height="12" rx="4"/><path d="M6 12h4M8 10v4M15 11h.01M18 13h.01"/>'],
+      ['Interests','Video Editing \u2022 3D Modeling','<path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 0 0 0-7.8z"/>'],
+      ['Skills','Learning AWS Cloud','<path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.2 1 2V17h6v-.3c0-.8.4-1.5 1-2A7 7 0 0 0 12 2z"/>']
+    ],
+    motto:'If not me, who? If not now, when?'
+  };
+  document.getElementById('pName').textContent=P.name;
+  document.getElementById('pSub').textContent=P.sub;
+  function fields(list){
+    return list.map(function(f){
+      if(!f[0])return '<div class="f" aria-hidden="true"></div>';
+      var v=f[1]?esc(f[1]):'Add your info';
+      return '<div class="f'+(f[1]?'':' tbd')+'"><small>'+esc(f[0])+'</small><b>'+v+'</b></div>';
+    }).join('');
+  }
+  /* Father/Mother sit in a 3-column row: remove the empty spacer cells */
+  document.getElementById('pMain').innerHTML=fields(P.main.filter(function(f,k){return f[0]||false}));
+  document.getElementById('pBody').innerHTML=fields(P.body);
+  document.getElementById('pMinis').innerHTML=P.minis.map(function(m){
+    return '<div class="mini'+(m[1]?'':' tbd')+'"><i><svg viewBox="0 0 24 24" aria-hidden="true">'+m[2]+'</svg></i><div><small>'+esc(m[0])+'</small><b>'+(m[1]?esc(m[1]):'Add your info')+'</b></div></div>';
+  }).join('');
+  var mo=document.getElementById('pMotto');
+  mo.className='motto'+(P.motto?'':' tbd');
+  mo.innerHTML='<p>'+(P.motto?'\u201C'+esc(P.motto)+'\u201D':'Add your motto here')+'</p><small>My Motto</small>';
 
   /* Social buttons: EDIT YOUR LINKS HERE (label, link) */
   var socials=[
@@ -413,7 +412,6 @@ footer{flex-shrink:0;display:flex;justify-content:center;align-items:center;gap:
   ];
   var shown=[],lastFocus=null;
   var shotsEl=document.getElementById('shots');
-  function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;')}
   /* Pick columns and rows so every award fits in view on a computer screen */
   function layoutShots(){
     if(window.matchMedia('(max-width:820px)').matches){shotsEl.style.gridTemplateColumns='';shotsEl.style.gridTemplateRows='';return}
@@ -454,10 +452,9 @@ footer{flex-shrink:0;display:flex;justify-content:center;align-items:center;gap:
 
   /* EDIT YOUR PEOPLE HERE: grp = fam | fr, img = key from IMGS above, ar = photo width / height, tag = caption */
   var people=[
-    {grp:'fam',img:'dad',ar:0.75,tag:'Handshake with my dad'},
-    {grp:'fam',img:'mom',ar:1.333,tag:'Hugging my mom'},
-    {grp:'fam',img:'sib',ar:1.878,tag:'Selfie with my little brother'},
-    {grp:'fr',img:'cafe',ar:1.333,tag:'Cafe hangout with friends'},
+    {grp:'fam',img:'dad',ar:0.75,tag:'My role model, my dad'},
+    {grp:'fam',img:'mom',ar:1.333,tag:'Home is wherever Mom hugs me'},
+    {grp:'fam',img:'sib',ar:1.878,tag:'My little brother, my little buddy'},
     {grp:'fr',img:'mirror',ar:1.28,tag:'Mirror selfie with the boys'}
   ];
   var peopleShown=people.filter(function(x){return IMGS[x.img]});
