@@ -163,13 +163,17 @@ h2{font-size:clamp(1.6rem,5.5vh,2.8rem);margin-bottom:2.4vh}
 .ff{flex:1;min-width:0;min-height:0;align-self:stretch;display:flex;flex-direction:column;gap:1vh;padding:1.4vh 0 1vh;overflow:hidden}
 .ff>h2{font-size:clamp(1.3rem,3.8vh,2rem);margin:0}
 .ff-lead{color:var(--ink);font-size:clamp(.7rem,1.7vh,.95rem)}
-.ff-row{flex:1;min-height:0;display:flex;justify-content:center;gap:clamp(.5rem,1vw,.9rem)}
-.pbtn{position:relative;flex:0 1 auto;height:100%;aspect-ratio:var(--ar);min-width:0;min-height:0;padding:0;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--panel);cursor:zoom-in;transition:border-color .15s,box-shadow .15s}
+/* Each photo has its caption (bold) and the names (muted) underneath */
+.ff-row{flex:1;min-height:0;display:flex;justify-content:center;gap:clamp(.5rem,1vw,.9rem);container-type:size}
+.pitem{flex:0 1 auto;min-width:0;height:100%;width:calc((100cqh - 4.6em) * var(--ar));display:flex;flex-direction:column;gap:.7vh;font-size:clamp(.62rem,1.5vh,.85rem);line-height:1.35}
+.pbtn{position:relative;flex:1 1 0;min-height:0;width:100%;padding:0;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--panel);cursor:zoom-in;transition:border-color .15s,box-shadow .15s}
 .pbtn img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
 .pbtn:hover,.pbtn:focus-visible{border-color:var(--accent);box-shadow:0 0 18px #1c9be055}
 .pbtn:focus-visible{outline:none}
-.pbtn .tag{position:absolute;left:.7em;bottom:.7em;max-width:calc(100% - 1.4em);font:500 clamp(.62rem,1.4vh,.8rem)/1.3 Poppins,sans-serif;color:var(--ink);background:color-mix(in srgb,var(--panel) 88%,transparent);border:1px solid var(--line);border-radius:999px;padding:.25em .9em;backdrop-filter:blur(4px)}
-@media (max-width:820px){.ff{overflow:hidden}.ff-row{flex:1;min-height:0;display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr)}.pbtn{aspect-ratio:auto}.pbtn .tag{display:none}}
+.pcap{flex:0 0 auto;height:3.6em;overflow:hidden}
+.pcap b{display:block;font-weight:600;color:var(--ink)}
+.pcap span{display:block;color:var(--mute)}
+@media (max-width:820px){.ff{overflow:hidden}.ff-row{flex:1;min-height:0;display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr)}.pitem{width:auto}.pcap{display:none}}
 .legal{flex-shrink:0;display:flex;justify-content:flex-start;align-items:center;flex-wrap:wrap;gap:.3rem 1.6rem;padding:.9vh max(5vw,260px) .9vh 5vw;border-top:1px solid var(--line);background:var(--hdr);color:var(--mute);font-size:.78em;line-height:1.4}
 .legal ul{list-style:none;padding:0;display:flex;flex-wrap:wrap;gap:.2rem 1.2rem}
 .legal a{color:var(--mute);text-decoration:none;transition:color .15s}
@@ -507,22 +511,23 @@ h2{font-size:clamp(1.6rem,5.5vh,2.8rem);margin-bottom:2.4vh}
   lb.onclick=function(e){if(e.target===lb)lbClose()};
   renderShots();
 
-  /* EDIT YOUR PEOPLE HERE: grp = fam | fr, img = key from IMGS above, ar = photo width / height, tag = caption */
+  /* EDIT YOUR PEOPLE HERE: grp = fam | fr, img = key from IMGS above, ar = photo width / height,
+     tag = caption (bold), names = who is in the photo (muted, under the caption) */
   var people=[
-    {grp:'fam',img:'dad',ar:0.75,tag:'My role model, my dad'},
-    {grp:'fam',img:'mom',ar:1.333,tag:'Home is wherever Mom hugs me'},
-    {grp:'fam',img:'sib',ar:1.878,tag:'My little brother, my little buddy'},
-    {grp:'fr',img:'mirror',ar:1.28,tag:'Mirror selfie with the boys'}
+    {grp:'fam',img:'dad',ar:0.75,tag:'Handshake with my dad',names:'Vedasto A. Mendoza'},
+    {grp:'fam',img:'mom',ar:1.333,tag:'Hugging my mom',names:'Lennie E. Mendoza'},
+    {grp:'fam',img:'sib',ar:1.878,tag:'Selfie with my sibling',names:'Jansen E. Mendoza'},
+    {grp:'fr',img:'mirror',ar:1.28,tag:'Mirror selfie with the boys',names:'Allen Rey Bato, Keith Nathan Soriano and Brian Dilaw'}
   ];
   var peopleShown=people.filter(function(x){return IMGS[x.img]});
   function peopleRow(grp,el){
     el.innerHTML=peopleShown.map(function(x,n){
       if(x.grp!==grp)return '';
-      return '<button type="button" class="pbtn" data-n="'+n+'" style="--ar:'+x.ar+'" aria-label="Zoom: '+esc(x.tag)+'"><img src="'+IMGS[x.img]+'" alt="'+esc(x.tag)+'" loading="lazy"><span class="tag">'+esc(x.tag)+'</span></button>';
+      return '<div class="pitem" style="--ar:'+x.ar+'"><button type="button" class="pbtn" data-n="'+n+'" aria-label="Zoom: '+esc(x.tag)+'"><img src="'+IMGS[x.img]+'" alt="'+esc(x.tag)+'" loading="lazy"></button><div class="pcap"><b>'+esc(x.tag)+'</b><span>'+esc(x.names)+'</span></div></div>';
     }).join('');
     [].forEach.call(el.querySelectorAll('.pbtn'),function(b){b.onclick=function(){
       lastFocus=b;
-      lbItems=peopleShown.map(function(x){return {img:x.img,title:x.tag,date:x.grp==='fam'?'Family':'Friends'}});
+      lbItems=peopleShown.map(function(x){return {img:x.img,title:x.tag+' \u2014 '+x.names,date:x.grp==='fam'?'Family':'Friends'}});
       lbShow(+b.getAttribute('data-n'));
     }});
   }
