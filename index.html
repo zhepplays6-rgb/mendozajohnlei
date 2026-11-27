@@ -80,6 +80,21 @@ h2{font-size:clamp(1.6rem,5.5vh,2.8rem);margin-bottom:2.4vh}
 .f small{display:block;font-size:.68em;letter-spacing:.09em;text-transform:uppercase;color:var(--mute);margin-bottom:.15em}
 .f b{display:block;font-weight:600;font-size:.95em;line-height:1.35;overflow-wrap:anywhere}
 .f.tbd b{color:var(--mute);font-weight:400;font-style:italic}
+/* Hover (or tap) a phone number / email to open its action menu */
+.pop{position:relative;display:inline-block;max-width:100%;outline:none}
+.pv{color:var(--accent);border-bottom:1px dashed var(--accent);cursor:pointer;transition:color .15s,border-color .15s}
+.pop:hover .pv,.pop:focus-within .pv{color:var(--neon);border-bottom-color:var(--neon)}
+.pop:focus-visible .pv{outline:2px solid var(--neon);outline-offset:2px;border-radius:2px}
+.menu{display:none;position:absolute;left:0;top:100%;z-index:20;padding-top:.4em;white-space:nowrap}
+.pop:hover .menu,.pop:focus-within .menu{display:flex;flex-direction:column}
+.menu a{display:block;font:600 .9em Poppins,sans-serif;color:var(--ink);background:var(--panel);border:1px solid var(--accent);padding:.45em 1.1em;text-decoration:none;box-shadow:0 8px 24px #0006}
+.menu a:first-child{border-radius:8px 8px 0 0}
+.menu a:last-child{border-radius:0 0 8px 8px}
+.menu a:only-child{border-radius:8px}
+.menu a+a{border-top-color:var(--line)}
+.menu a:hover,.menu a:focus-visible{background:var(--accent);color:#fff;outline:none}
+#toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 5vh);transform:translate(-50%,12px);z-index:60;background:var(--panel);color:var(--ink);border:1px solid var(--accent);border-radius:999px;padding:.55em 1.2em;font:500 .9rem Poppins,sans-serif;box-shadow:0 8px 24px #0006;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;max-width:90vw;text-align:center}
+#toast.on{opacity:1;transform:translate(-50%,0)}
 .minis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(.5rem,1vw,.9rem)}
 .mini{display:flex;align-items:center;gap:.7rem;min-width:0;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:1.1vh .8rem}
 .mini i{flex:0 0 auto;display:grid;place-items:center;width:2.4em;height:2.4em;border-radius:10px;background:#1c9be01f;border:1px solid var(--line);font-style:normal}
@@ -371,9 +386,9 @@ h2{font-size:clamp(1.6rem,5.5vh,2.8rem);margin-bottom:2.4vh}
     sub:'BSIT \u2022 1st Year',
     main:[
       ['Gender','Male'],['Status','Single'],['Age','18'],
-      ['Birthday','October 2, 2008'],['Address',"Teacher's Camp, Lower Cabinet Hill, Baguio City"],['Phone Number','09995691110'],
+      ['Birthday','October 2, 2008'],['Address',"Teacher's Camp, Lower Cabinet Hill, Baguio City"],['Phone Number','09995691110',[['Call','tel:+639995691110'],['Text','sms:+639995691110']]],
       ['School','University of the Cordilleras'],['Year Level','1st Year'],['Program','BS Information Technology'],
-      ['College','College of Information Technology'],['',''],['Email','mendozajohnlei7@gmail.com'],
+      ['College','College of Information Technology'],['',''],['Email','mendozajohnlei7@gmail.com',[['Send an email','mailto:mendozajohnlei7@gmail.com']]],
       ["Father's Name",'Vedasto A. Mendoza'],['',''],["Mother's Name",'Lennie E. Mendoza']
     ],
     body:[
@@ -393,7 +408,10 @@ h2{font-size:clamp(1.6rem,5.5vh,2.8rem);margin-bottom:2.4vh}
   function fields(list){
     return list.map(function(f){
       if(!f[0])return '<div class="f" aria-hidden="true"></div>';
-      var v=f[1]?esc(f[1]):'Add your info';
+      var v;
+      if(!f[1])v='Add your info';
+      else if(f[2])v='<span class="pop" tabindex="0"><span class="pv">'+esc(f[1])+'</span><span class="menu">'+f[2].map(function(a){return '<a href="'+esc(a[1])+'">'+esc(a[0])+'</a>'}).join('')+'</span></span>';
+      else v=esc(f[1]);
       return '<div class="f'+(f[1]?'':' tbd')+'"><small>'+esc(f[0])+'</small><b>'+v+'</b></div>';
     }).join('');
   }
@@ -510,6 +528,26 @@ h2{font-size:clamp(1.6rem,5.5vh,2.8rem);margin-bottom:2.4vh}
   }
   peopleRow('fam',document.getElementById('famRow'));
   peopleRow('fr',document.getElementById('frRow'));
+
+  /* Contact actions: on a phone they open the real Phone / Messages / Mail app.
+     On a computer: Send an email opens Gmail's compose window, Call / Text copy the number. */
+  var toast=document.createElement('div');toast.id='toast';toast.setAttribute('role','status');document.body.appendChild(toast);
+  var tt;
+  function say(m){toast.textContent=m;toast.className='on';clearTimeout(tt);tt=setTimeout(function(){toast.className=''},2800)}
+  function copyText(s){
+    function done(){say('Number copied: '+s)}
+    function old(){try{var ta=document.createElement('textarea');ta.value=s;ta.style.cssText='position:fixed;opacity:0';document.body.appendChild(ta);ta.select();var ok=document.execCommand('copy');document.body.removeChild(ta);if(ok)done();else say('Number: '+s)}catch(e){say('Number: '+s)}}
+    if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(s).then(done,old);else old();
+  }
+  document.addEventListener('click',function(e){
+    var a=e.target.closest&&e.target.closest('.menu a');
+    if(!a||window.matchMedia('(pointer:coarse)').matches)return;
+    var h=a.getAttribute('href');
+    e.preventDefault();
+    if(h.indexOf('mailto:')===0){
+      window.open('https://mail.google.com/mail/?view=cm&fs=1&to='+encodeURIComponent(h.slice(7))+'&su='+encodeURIComponent('Hello from your portfolio'),'_blank','noopener');
+    }else{copyText(h.replace(/^(tel|sms):/,''))}
+  });
   show(0);
 })();
 </script>
